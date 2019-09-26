@@ -1,10 +1,10 @@
--- Create database
+-- 1. Create database
 CREATE DATABASE `students`;
 
--- Switching to database
+-- 2. Switching to database
 USE `students`;
 
--- Create table majors
+-- 3. Create table majors
 DROP TABLE IF EXISTS `majors`;
 CREATE TABLE `majors` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +12,7 @@ CREATE TABLE `majors` (
   `faculty` text NOT NULL
 );
 
--- Create table groups
+-- 4. Create table groups
 DROP TABLE IF EXISTS `groups`
 CREATE TABLE `groups` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE `groups` (
   `major_id` int(11) NOT NULL
 );
 
--- Create table students
+-- 5. Create table students
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -31,12 +31,12 @@ CREATE TABLE `students` (
   `group_id` int(11) NOT NULL
 );
 
--- Add two items into majors table
+-- 6. Add two items into majors table
 INSERT INTO `majors` (`id`, `name`, `faculty`) VALUES
 (1,	'theoretical_computer_science',	'computer_science_departament'),
 (2,	'machine_learning',	'computer_science_department');
 
--- Add five items into groups table
+-- 7. Add five items into groups table
 INSERT INTO `groups` (`id`, `name`, `major_id`) VALUES
 (1,	'class-2018',	1),
 (2,	'class-2019',	1),
@@ -44,7 +44,7 @@ INSERT INTO `groups` (`id`, `name`, `major_id`) VALUES
 (4,	'class-2021',	2),
 (5,	'class-2022',	2);
 
--- Insert 20 items into students
+-- 8. Insert 20 items into students
 INSERT INTO `students` (`id`, `name`, `stipend`, `birthday`, `sex`, `group_id`) VALUES
 (1,	'John Doe',	33000,	'2019-09-26 11:29:59',	'M',	1),
 (2,	'Jane Doe',	55000,	'2000-09-26 00:01:00',	'F',	2),
@@ -66,3 +66,18 @@ INSERT INTO `students` (`id`, `name`, `stipend`, `birthday`, `sex`, `group_id`) 
 (18,	'Tim Loon',	32000,	'1997-12-08 00:01:00',	'M',	5),
 (19,	'Henrik Holm',	44000,	'2001-04-01 00:01:00',	'F',	1),
 (20,	'Isaak Valtersen',	30000,	'1996-08-26 00:01:00',	'N',	2);
+
+-- 9. Select data from join over three tables
+SELECT 
+    A.name AS student_name,
+    B.name as group_name,
+    C.name as major,
+    C.faculty as faculty
+FROM 
+   `students` as A
+      INNER JOIN
+        `groups` AS B
+        on A.group_id = B.id
+          INNER JOIN
+            `majors` AS C
+             on B.major_id = C.id
