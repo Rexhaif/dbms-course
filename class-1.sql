@@ -45,4 +45,10 @@ CREATE TABLE `pairs` AS (
     FROM names INNER JOIN surnames ON names.sex = surnames.sex
 );
 
-SELECT * FROM pairs;
+CREATE FUNCTION IF NOT EXISTS random_group_id() RETURNS INT
+NOT DETERMINISTIC
+BEGIN
+DECLARE return_id int;
+SELECT id INTO return_id FROM `groups` ORDER BY rand() LIMIT 1);
+RETURN return_id;
+END
