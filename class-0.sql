@@ -17,7 +17,8 @@ DROP TABLE IF EXISTS `groups`
 CREATE TABLE `groups` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` text NOT NULL,
-  `major_id` int(11) NOT NULL
+  `major_id` int(11) NOT NULL,
+  FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`)
 );
 
 -- 5. Create table students
@@ -28,7 +29,8 @@ CREATE TABLE `students` (
   `stipend` int unsigned NOT NULL,
   `birthday` datetime NOT NULL,
   `sex` char NOT NULL,
-  `group_id` int(11) NOT NULL
+  `group_id` int(11) NOT NULL,
+  FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
 );
 
 -- 6. Add two items into majors table
