@@ -13,7 +13,7 @@ CREATE TABLE `majors` (
 );
 
 -- 4. Create table groups
-DROP TABLE IF EXISTS `groups`
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` text NOT NULL,
