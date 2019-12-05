@@ -55,4 +55,8 @@ END//
 DELIMITER ;
 
 
-SELECT generate_id();
+-- 4. Random data insert
+INSERT INTO `students` (name, stipend, birthday, sex, group_id)
+    SELECT CONCAT(surnames.surname, ' ' ,names.name), rand() * 10000, '2019-09-26 11:29:59', surnames.sex, generate_id()
+    FROM names INNER JOIN surnames ON names.sex = surnames.sex;
+    
